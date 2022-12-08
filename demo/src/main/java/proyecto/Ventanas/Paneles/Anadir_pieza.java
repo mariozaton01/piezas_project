@@ -62,6 +62,13 @@ public class Anadir_pieza extends javax.swing.JPanel {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 t_idFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                try {
+                    t_idFocusLost(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         });
 
         t_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -125,7 +132,7 @@ public class Anadir_pieza extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(b_anadir, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,6 +221,24 @@ public class Anadir_pieza extends javax.swing.JPanel {
     }//GEN-LAST:event_n_precioFocusGained
 
     private void t_nombreFocusLost(java.awt.event.FocusEvent evt) throws SQLException {//GEN-FIRST:event_t_nombreFocusLost
+        // TODO add your handling code here:
+        String id = t_id.getText();
+        Pieza p = Main.getIdPieza(id);
+        if (p == null){
+            error = false;
+        }
+        else {
+            error = true;
+        }
+        if (error){
+            t_id.setBorder(new LineBorder(Color.red,1));
+            t_id.setText("ID ya utilizado");
+            t_id.setForeground(Color.red);
+
+        }
+
+    }//GEN-LAST:event_t_nombreFocusLost
+    private void t_idFocusLost(java.awt.event.FocusEvent evt) throws SQLException {//GEN-FIRST:event_t_nombreFocusLost
         // TODO add your handling code here:
         String id = t_id.getText();
         Pieza p = Main.getIdPieza(id);

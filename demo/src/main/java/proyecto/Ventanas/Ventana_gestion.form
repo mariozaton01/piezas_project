@@ -126,14 +126,6 @@
             <Property name="text" type="java.lang.String" value="Gesti&#xf3;n"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="visualizar_gestion">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Visualizar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="visualizar_gestionActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="anadir_gestion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir"/>

@@ -38,11 +38,11 @@
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="b_porPieza" min="-2" pref="113" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="b_porProyecto" min="-2" pref="123" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="b_porproveedor" min="-2" pref="123" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="b_porProyecto" min="-2" pref="123" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                               <Component id="b_restablecer" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" min="-2" pref="888" max="-2" attributes="0"/>
@@ -62,11 +62,11 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="b_porPieza" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
-                  <Component id="b_porProyecto" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="b_porproveedor" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="b_restablecer" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="b_porProyecto" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
               <Component id="t_buscador" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="358" max="-2" attributes="0"/>

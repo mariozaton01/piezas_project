@@ -50,7 +50,6 @@ public class Ventana_gestion extends javax.swing.JFrame {
         borrar_proyecto = new javax.swing.JMenuItem();
         menu_listadoProyecto = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        visualizar_gestion = new javax.swing.JMenuItem();
         anadir_gestion = new javax.swing.JMenuItem();
         borrar_gestion = new javax.swing.JMenuItem();
         menu_listado_gestion = new javax.swing.JMenuItem();
@@ -185,14 +184,6 @@ public class Ventana_gestion extends javax.swing.JFrame {
         jMenuBar1.add(m_empleado);
 
         jMenu1.setText("Gestión");
-
-        visualizar_gestion.setText("Visualizar");
-        visualizar_gestion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                visualizar_gestionActionPerformed(evt);
-            }
-        });
-        jMenu1.add(visualizar_gestion);
 
         anadir_gestion.setText("Añadir");
         anadir_gestion.addActionListener(new java.awt.event.ActionListener() {
@@ -350,16 +341,26 @@ public class Ventana_gestion extends javax.swing.JFrame {
         panel.repaint();
     }//GEN-LAST:event_borrar_proyectoActionPerformed
 
-    private void visualizar_gestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizar_gestionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_visualizar_gestionActionPerformed
-
     private void anadir_gestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadir_gestionActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:Listado_gestion listadoGestion = new Listado_gestion();
+        Anadir_gestion anadir_gestion = new Anadir_gestion();
+        anadir_gestion.setSize(1071,585);
+        anadir_gestion.setLocation(0,0);
+        panel.removeAll();
+        panel.add(anadir_gestion,BorderLayout.CENTER);
+        panel.revalidate();
+        panel.repaint();
     }//GEN-LAST:event_anadir_gestionActionPerformed
 
     private void borrar_gestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrar_gestionActionPerformed
         // TODO add your handling code here:
+        Borrar_gestion borrar_gestion = new Borrar_gestion();
+        borrar_gestion.setSize(1071,585);
+        borrar_gestion.setLocation(0,0);
+        panel.removeAll();
+        panel.add(borrar_gestion,BorderLayout.CENTER);
+        panel.revalidate();
+        panel.repaint();
     }//GEN-LAST:event_borrar_gestionActionPerformed
 
     private void menu_listadoPiezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_listadoPiezaActionPerformed
@@ -480,6 +481,5 @@ public class Ventana_gestion extends javax.swing.JFrame {
     private javax.swing.JMenuItem ver_pieza;
     private javax.swing.JMenuItem ver_proveedor;
     private javax.swing.JMenuItem ver_proyecto;
-    private javax.swing.JMenuItem visualizar_gestion;
     // End of variables declaration//GEN-END:variables
 }

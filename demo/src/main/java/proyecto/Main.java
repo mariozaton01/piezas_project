@@ -4,10 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
 import proyecto.Entidades.*;
 import proyecto.Ventanas.*;
 
@@ -44,7 +41,7 @@ public class Main {
 
     public static void getPiezasstoComboBox(JComboBox<String> cb_pieza) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        transaction = entityManager.getTransaction();
+        //transaction = entityManager.getTransaction();
         try{
 
             List<Pieza> lista = entityManager.createQuery("FROM Pieza ").getResultList();
@@ -80,6 +77,10 @@ public class Main {
             entityManager.close();
         }
         catch (Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
             JOptionPane.showMessageDialog(null, "Error al borrar pieza.");
 
         }
@@ -112,6 +113,10 @@ public class Main {
             entityManager.close();
         }
         catch (Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
             JOptionPane.showMessageDialog(null, "Error al actualizar pieza.");
 
         }
@@ -135,6 +140,10 @@ public class Main {
 
         }
         catch (Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
             JOptionPane.showMessageDialog(null, "Error al insertar: " +e.getMessage());
 
         }
@@ -151,9 +160,7 @@ public class Main {
 
     public static void getProveedortoComboBox(JComboBox<String> cb_proveedor) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        transaction = entityManager.getTransaction();
         try{
-            transaction.begin();
 
             List<Proveedor> lista = entityManager.createQuery("FROM Proveedor").getResultList();
             for(Proveedor proveedor : lista){
@@ -163,10 +170,13 @@ public class Main {
                 System.out.println(nombre);
                 cb_proveedor.addItem(id+"- " + nombre);
             }
-            transaction.commit();
             entityManager.close();
         }
         catch (Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
             JOptionPane.showMessageDialog(null, "Error al conseguir los proveedores.");
 
         }
@@ -189,6 +199,10 @@ public class Main {
             entityManager.close();
         }
         catch (Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
             JOptionPane.showMessageDialog(null, "Error al borrar proveedor.");
 
         }
@@ -217,6 +231,10 @@ public class Main {
             entityManager.close();
         }
         catch (Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
             JOptionPane.showMessageDialog(null, "Error al actualizar proveedor.");
 
         }
@@ -237,6 +255,10 @@ public class Main {
 
         }
         catch (Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
             JOptionPane.showMessageDialog(null, "Error al insertar: "+ e.getMessage());
 
         }
@@ -268,6 +290,10 @@ public class Main {
             //transaction.commit();
             //entityManager.close();
         }catch (Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
             JOptionPane.showMessageDialog(null, "Error al conseguir los proyecto.");
 
         }
@@ -291,6 +317,10 @@ public class Main {
             entityManager.close();
         }
         catch (Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
             JOptionPane.showMessageDialog(null, "Error al borrar proyecto.");
 
         }
@@ -316,6 +346,10 @@ public class Main {
             entityManager.close();
         }
         catch (Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
             JOptionPane.showMessageDialog(null, "Error al actualizar proyecto.");
 
         }
@@ -338,6 +372,10 @@ public class Main {
 
         }
         catch (Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
             JOptionPane.showMessageDialog(null, "Error al insertar: " + e.getMessage());
 
         }
@@ -436,6 +474,93 @@ public class Main {
         }
         tabla.setModel(model);
 
+    }
+
+    public static Gestion getGestionByIds(String idPieza, String idProveedor, String idProyecto) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        Query query = entityManager.createQuery("FROM Gestion where idPieza = '"+idPieza+"'and idProveedor = '"+idProveedor+"' and idProyecto = '"+ idProyecto+ "'");
+        System.out.println(query.getFirstResult());
+        List<Gestion> lista = (List<Gestion>) query.getResultList();
+        Gestion g = null;
+        if(lista.isEmpty()) g= null;
+        else g = lista.get(0);
+
+        return  g;
+    }
+
+    public static void insertGestion(Gestion gestion) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        try{
+            transaction = entityManager.getTransaction();
+
+            transaction.begin();
+
+            entityManager.persist(gestion);
+            transaction.commit();
+            entityManager.close();
+        }
+        catch(Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
+            JOptionPane.showMessageDialog(null, "Error al insertar: " + e.getMessage());
+
+        }
+
+    }
+
+    public static void getGestiontoComboBox(JComboBox<String> cbGestion) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        //transaction = entityManager.getTransaction();
+        try{
+
+            List<Gestion> lista = entityManager.createQuery("FROM Gestion ").getResultList();
+            for(Gestion gestion : lista){
+
+                String idPieza = gestion.getIdPieza();
+                String idProyecto = gestion.getIdProyecto();
+                String idProveedor = gestion.getIdProveedor();
+                cbGestion.addItem(idPieza+ "-" +idProveedor +"-"+idProyecto);
+            }
+            entityManager.close();
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Error al conseguir las piezas.");
+
+        }
+    }
+
+    public static void deleteGestion(String idPieza, String idProveedor, String idProyecto) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        transaction = entityManager.getTransaction();
+        try{
+            transaction.begin();
+
+            Query query = entityManager.createQuery("FROM Gestion where idPieza = '"+idPieza+"'and idProveedor = '"+idProveedor+"' and idProyecto = '"+ idProyecto+ "'");
+            System.out.println(query.getFirstResult());
+            List<Gestion> lista = (List<Gestion>) query.getResultList();
+
+            Gestion g = null;
+
+            if(lista.isEmpty()) g= null;
+            else{
+                g = lista.get(0);
+                entityManager.remove(g);
+                transaction.commit();
+            }
+            entityManager.close();
+        }
+        catch (Exception e){
+            if (transaction.isActive()){
+                transaction.rollback();
+                entityManager.close();
+            }
+            JOptionPane.showMessageDialog(null, "Error al borrar gestion.");
+
+        }
     }
 }
 
