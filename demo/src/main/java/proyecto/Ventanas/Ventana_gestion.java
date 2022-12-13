@@ -53,6 +53,7 @@ public class Ventana_gestion extends javax.swing.JFrame {
         anadir_gestion = new javax.swing.JMenuItem();
         borrar_gestion = new javax.swing.JMenuItem();
         menu_listado_gestion = new javax.swing.JMenuItem();
+        menu_consultas_gestion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -208,6 +209,14 @@ public class Ventana_gestion extends javax.swing.JFrame {
             }
         });
         jMenu1.add(menu_listado_gestion);
+
+        menu_consultas_gestion.setText("Consultas");
+        menu_consultas_gestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_consultas_gestionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menu_consultas_gestion);
 
         jMenuBar1.add(jMenu1);
 
@@ -407,6 +416,17 @@ public class Ventana_gestion extends javax.swing.JFrame {
         panel.repaint();
     }//GEN-LAST:event_menu_listado_gestionActionPerformed
 
+    private void menu_consultas_gestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_consultas_gestionActionPerformed
+        // TODO add your handling code here:
+        Listado_consultas_gestion listadoConsultasGestion = new Listado_consultas_gestion();
+        listadoConsultasGestion.setSize(1071,585);
+        listadoConsultasGestion.setLocation(0,0);
+        panel.removeAll();
+        panel.add(listadoConsultasGestion,BorderLayout.CENTER);
+        panel.revalidate();
+        panel.repaint();
+    }//GEN-LAST:event_menu_consultas_gestionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -474,6 +494,7 @@ public class Ventana_gestion extends javax.swing.JFrame {
     private javax.swing.JMenu m_empleado;
     private javax.swing.JMenu menu_Espectaculos;
     private javax.swing.JMenuItem menu_ListadoProveedor;
+    private javax.swing.JMenuItem menu_consultas_gestion;
     private javax.swing.JMenuItem menu_listadoPieza;
     private javax.swing.JMenuItem menu_listadoProyecto;
     private javax.swing.JMenuItem menu_listado_gestion;

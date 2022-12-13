@@ -8,6 +8,8 @@ import jakarta.persistence.*;
 import proyecto.Entidades.*;
 import proyecto.Ventanas.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -499,6 +501,8 @@ public class Main {
 
             entityManager.persist(gestion);
             transaction.commit();
+            JOptionPane.showMessageDialog(null, "Gestion añadida.");
+
             entityManager.close();
         }
         catch(Exception e){
@@ -562,7 +566,50 @@ public class Main {
 
         }
     }
+
+    public static void listadoCountPiezasPorProyecto(JTable tabla) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        ArrayList<Object[]>lista = null;
+        Query query = entityManager.createQuery(
+        "select g.idProyecto, count(g.idPieza) as totalPiezas,sum(g.cantidad), sum(p.precio)*g.cantidad as totalPrecio  from Gestion as g inner join Pieza as p on g.idPieza  = p.id group by g.idProyecto order by totalPiezas desc ");
+        
+        lista = (ArrayList<Object[]>) query.getResultList();
+         
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Proyecto");
+        model.addColumn("Total de piezas");
+        model.addColumn("Cantidad total de piezas");
+        model.addColumn("Precio total");
+        for(Object[] result : lista){
+            System.out.println(Arrays.stream(result).count());
+            model.addRow(result);
+        }
+        tabla.setModel(model);
+    }
+
+    public static void listadoCountProyectosPorPieza(JTable tabla) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        ArrayList<Object[]>lista = null;
+        Query query = entityManager.createQuery(
+                "select g.idPieza, count(g.idProyecto) as totalProyectos from Gestion as g inner join Pieza as p on g.idPieza  = p.id group by g.idPieza order by totalProyectos desc ");
+
+        lista = (ArrayList<Object[]>) query.getResultList();
+
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Pieza");
+        model.addColumn("Total de proyectos");
+        for(Object[] result : lista){
+            System.out.println(Arrays.stream(result).count());
+            model.addRow(result);
+        }
+        tabla.setModel(model);
+    }
+
+
 }
+
 
 
 
